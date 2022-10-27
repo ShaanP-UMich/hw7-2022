@@ -1,15 +1,20 @@
-// var video = document.getElementById('player1');
-
 window.addEventListener("load", function () {
 	console.log("Good job opening the window");
 
+	// Global var
 	video = document.getElementById('player1');
 
-	video.setAttribute('autoplay', false);
-	video.setAttribute('loop', false);
+	// video.setAttribute('autoplay', false);
+	// video.setAttribute('loop', false);
 
-	console.log("Auto play is set to " + video.getAttribute('autoplay'));
-	console.log("Loop is set to " + video.getAttribute('loop'));
+	video.autoplay = false;
+	video.loop = false;
+
+	// console.log("Auto play is set to " + video.getAttribute('autoplay'));
+	// console.log("Loop is set to " + video.getAttribute('loop'));
+
+	console.log("Auto play is set to " + video.autoplay);
+	console.log("Loop is set to " + video.loop);
 
 	addEventListeners();
 });
@@ -33,6 +38,9 @@ function addEventListeners() {
 	});
 
 	document.querySelector("#slower").addEventListener("click", slowDown);
+	document.querySelector("#faster").addEventListener("click", speedUp);
+	document.querySelector("#skip").addEventListener("click", skipAhead);
+	document.querySelector("#mute").addEventListener("click", handleMute);
 }
 
 function updateVolumeInfo() {
@@ -40,7 +48,48 @@ function updateVolumeInfo() {
 }
 
 function slowDown() {
-	let currVideoSpeed = video.getAttribute('playbackRate');
+	let currVideoSpeed = video.playbackRate;
 
-	console.log(currVideoSpeed);
+	console.log("Slow down video");
+
+	video.playbackRate = currVideoSpeed * 0.9;
+
+	console.log("Speed is " + video.playbackRate);
+}
+
+function speedUp() {
+	let currVideoSpeed = video.playbackRate;
+
+	console.log("Speed up Video");
+
+	video.playbackRate = currVideoSpeed / 0.9;
+
+	console.log("Speed is " + video.playbackRate);
+}
+
+function skipAhead() {
+
+	console.log(video.duration);
+
+	if (video.currentTime + 10 > video.duration) {
+		video.currentTime = 0;
+		video.pause();
+	}
+	else {
+		video.currentTime += 10;
+	}
+
+	console.log("Skip ahead");
+	console.log("Video current time is " + video.currentTime);
+}
+
+function handleMute() {
+	if (video.muted) {
+		video.muted = false;
+		document.getElementById('mute').innerText = "Mute";
+	}
+	else {
+		video.muted = true;
+		document.getElementById('mute').innerText = "Unmute";
+	}
 }
