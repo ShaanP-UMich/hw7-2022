@@ -41,6 +41,7 @@ function addEventListeners() {
 	document.querySelector("#faster").addEventListener("click", speedUp);
 	document.querySelector("#skip").addEventListener("click", skipAhead);
 	document.querySelector("#mute").addEventListener("click", handleMute);
+	document.querySelector("#slider").addEventListener("change", handleVolumeSlider);
 }
 
 function updateVolumeInfo() {
@@ -92,4 +93,12 @@ function handleMute() {
 		video.muted = true;
 		document.getElementById('mute').innerText = "Unmute";
 	}
+}
+
+function handleVolumeSlider() {
+	let currentVolume = document.getElementById('slider').value / 100;
+
+	video.volume = currentVolume;
+
+	console.log("The current value is " + video.volume);
 }
