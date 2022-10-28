@@ -42,6 +42,8 @@ function addEventListeners() {
 	document.querySelector("#skip").addEventListener("click", skipAhead);
 	document.querySelector("#mute").addEventListener("click", handleMute);
 	document.querySelector("#slider").addEventListener("change", handleVolumeSlider);
+	document.querySelector("#vintage").addEventListener("click", handleOldSchool);
+	document.querySelector("#orig").addEventListener("click", handleOriginal);
 }
 
 function updateVolumeInfo() {
@@ -69,9 +71,6 @@ function speedUp() {
 }
 
 function skipAhead() {
-
-	console.log(video.duration);
-
 	if (video.currentTime + 10 > video.duration) {
 		video.currentTime = 0;
 		video.pause();
@@ -101,4 +100,14 @@ function handleVolumeSlider() {
 	video.volume = currentVolume;
 
 	console.log("The current value is " + video.volume);
+}
+
+function handleOldSchool() {
+	if (!video.classList.contains("oldSchool"))
+		video.classList.add("oldSchool");
+}
+
+function handleOriginal() {
+	if (video.classList.contains("oldSchool"))
+		video.classList.remove("oldSchool");
 }
