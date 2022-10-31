@@ -47,7 +47,7 @@ function addEventListeners() {
 }
 
 function updateVolumeInfo() {
-
+	document.getElementById('volume').innerHTML = (video.volume * 100) + "%";
 }
 
 function slowDown() {
@@ -98,6 +98,9 @@ function handleVolumeSlider() {
 	let currentVolume = document.getElementById('slider').value / 100;
 
 	video.volume = currentVolume;
+	// document.getElementById('volume').innerHTML = (video.volume * 100) + "%";
+
+	updateVolumeInfo();
 
 	console.log("The current value is " + video.volume);
 }
